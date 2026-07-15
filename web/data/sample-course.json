@@ -1,0 +1,43 @@
+{
+  "id": "sample-reception",
+  "title": "접수 프로그램 기본 교육",
+  "targetApp": "업무 프로그램",
+  "steps": [
+    {
+      "id": "step-1",
+      "title": "메뉴 위치 확인",
+      "body": "상단 메뉴에서 접수 항목을 확인합니다. 교육 중 실제 프로그램 조작이 필요하면 클릭 통과를 켭니다.",
+      "screenshotPath": "web/data/assets/screenshots/step-1.png",
+      "accent": "focus",
+      "clickThrough": true,
+      "screenshotSize": { "width": 1920, "height": 1080 },
+      "highlightPx": { "x": 96, "y": 86, "width": 260, "height": 78 },
+      "highlightRatio": { "x": 0.05, "y": 0.0796, "width": 0.1354, "height": 0.0722 },
+      "callout": { "placement": "right" }
+    },
+    {
+      "id": "step-2",
+      "title": "필수 입력 영역",
+      "body": "수검자 정보 입력 영역입니다. 이름, 연락처, 검진 구분을 순서대로 확인합니다.",
+      "screenshotPath": "web/data/assets/screenshots/step-2.png",
+      "accent": "guide",
+      "clickThrough": true,
+      "screenshotSize": { "width": 1920, "height": 1080 },
+      "highlightPx": { "x": 420, "y": 220, "width": 460, "height": 230 },
+      "highlightRatio": { "x": 0.2188, "y": 0.2037, "width": 0.2396, "height": 0.213 },
+      "callout": { "placement": "bottom" }
+    },
+    {
+      "id": "step-3",
+      "title": "저장 전 확인",
+      "body": "저장 버튼을 누르기 전에 누락 항목이 없는지 확인합니다.",
+      "screenshotPath": "web/data/assets/screenshots/step-3.png",
+      "accent": "warning",
+      "clickThrough": false,
+      "screenshotSize": { "width": 1920, "height": 1080 },
+      "highlightPx": { "x": 980, "y": 720, "width": 180, "height": 72 },
+      "highlightRatio": { "x": 0.5104, "y": 0.6667, "width": 0.0938, "height": 0.0667 },
+      "callout": { "placement": "left" }
+    }
+  ]
+}

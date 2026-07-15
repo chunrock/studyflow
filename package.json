@@ -1,0 +1,21 @@
+{
+  "name": "studyflow",
+  "version": "0.1.0",
+  "private": true,
+  "description": "업무 프로그램 위에 교육용 강조 표시와 설명을 오버레이하는 데스크톱 앱",
+  "main": "electron/main.js",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "electron .",
+    "check": "node --check electron/main.js && node --check electron/preload.js && node --check web/scripts/scenario-schema.js && node --check web/scripts/overlay-geometry.js && node --check web/scripts/overlay-state.js && node --check web/scripts/render.js && node --check web/scripts/app.js",
+    "test": "node --test tests/*.test.js"
+  },
+  "dependencies": {
+    "docx": "^8.5.0",
+    "pdfkit": "^0.15.0",
+    "pptxgenjs": "^3.12.0"
+  },
+  "devDependencies": {
+    "electron": "^31.0.0"
+  }
+}

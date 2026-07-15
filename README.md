@@ -1,13 +1,16 @@
-# 교육플로우 자료생성
+# StudyFlow
 
-Claude Code/Codex 하네스 구성을 재현하기 위한 에이전트, 팀, 하위 프로젝트 자료 저장소입니다. `PROMPT.md`의 자기완결형 하네스 명세를 바탕으로 전역 규칙, 8개 팀 구성, 프로젝트 템플릿을 저장소 안에서 검토 가능한 형태로 정리했습니다.
+교육 플로우를 화면 위 오버레이로 안내하는 StudyFlow 프로젝트입니다. 이 저장소에는 Electron 기반 교육 오버레이 앱 자료와 Claude Code/Codex 하네스 구성을 재현하기 위한 에이전트, 팀, 하위 프로젝트 자료가 함께 들어 있습니다.
 
 ## 구조
 
 ```text
 .
 ├── AGENTS.md
+├── CHANGELOG.md
+├── CLAUDE.md
 ├── README.md
+├── THEME.md
 ├── agents
 │   ├── global
 │   │   ├── CLAUDE.md
@@ -21,6 +24,9 @@ Claude Code/Codex 하네스 구성을 재현하기 위한 에이전트, 팀, 하
 │       ├── project-frontend-dev
 │       ├── proposal-team
 │       └── qa-team
+├── electron
+├── tests
+├── web
 └── subprojects
     ├── project-dev.md
     └── project-frontend-dev.md
@@ -28,6 +34,9 @@ Claude Code/Codex 하네스 구성을 재현하기 위한 에이전트, 팀, 하
 
 ## 포함 내용
 
+- `web/`: StudyFlow 오버레이 웹 UI 원본
+- `electron/`: Electron 메인/프리로드 코드
+- `tests/`: 오버레이 상태, 위치 계산, 시나리오 스키마 테스트
 - `AGENTS.md`: 이 저장소에서 에이전트가 따라야 할 운영 규칙
 - `agents/global/CLAUDE.md`: Claude Code 전역 작업 규칙 템플릿
 - `agents/global/settings.template.json`: `~/.claude/settings.json`에 반영할 수 있는 설정 템플릿
