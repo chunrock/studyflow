@@ -1,0 +1,20 @@
+{
+  "name": "ops-team",
+  "description": "프로젝트 운영 팀. 일정관리, 내부 커뮤니케이션, 회의록, 상태 리포트, 체크리스트, 과제 행정 지원을 담당한다.",
+  "members": [
+    {
+      "name": "pm",
+      "agentId": "pm@ops-team",
+      "agentType": "manager",
+      "description": "일정관리, 진행 추적, 리소스 조율, 마일스톤 관리",
+      "skills": ["document-skills:xlsx"]
+    },
+    {
+      "name": "communicator",
+      "agentId": "communicator@ops-team",
+      "agentType": "writer",
+      "description": "회의록, 상태보고, 내부 커뮤니케이션 문서 작성",
+      "skills": ["document-skills:internal-comms", "document-skills:docx"]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "name": "bizdev-team",
+  "description": "사업화/영업 지원 팀. 시장조사, 경쟁분석, 사업화 전략, 기술이전 계획, 사업계획서, 영업 제안 지원을 담당한다.",
+  "members": [
+    {
+      "name": "researcher",
+      "agentId": "researcher@bizdev-team",
+      "agentType": "researcher",
+      "description": "시장조사, 경쟁분석, 트렌드 리서치",
+      "skills": ["document-skills:xlsx", "document-skills:pdf"]
+    },
+    {
+      "name": "strategist",
+      "agentId": "strategist@bizdev-team",
+      "agentType": "strategist",
+      "description": "사업화 전략, 수익모델 설계, 기술이전 계획",
+      "skills": ["document-skills:doc-coauthoring", "document-skills:pptx"]
+    },
+    {
+      "name": "presenter",
+      "agentId": "presenter@bizdev-team",
+      "agentType": "writer",
+      "description": "사업계획서, IR자료, 영업제안서 작성",
+      "skills": ["document-skills:docx", "document-skills:pptx"]
+    }
+  ]
+}

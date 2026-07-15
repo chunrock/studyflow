@@ -1,0 +1,14 @@
+{
+  "name": "project-frontend-dev",
+  "description": "프로젝트 Frontend 전용 팀: Figma to React 변환, 코드 리뷰, 문서화",
+  "leadAgentId": "team-lead@project-frontend-dev",
+  "members": [
+    {
+      "agentId": "team-lead@project-frontend-dev",
+      "name": "team-lead",
+      "agentType": "team-lead",
+      "cwd": "<PROJECT_ROOT>/frontend",
+      "subscriptions": []
+    }
+  ]
+}

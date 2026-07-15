@@ -1,0 +1,34 @@
+{
+  "name": "project-dev",
+  "description": "프로젝트 FE/BE 통합 개발 팀.",
+  "members": [
+    {
+      "name": "team-lead",
+      "agentId": "team-lead@project-dev",
+      "agentType": "team-lead",
+      "cwd": "<PROJECT_ROOT>",
+      "description": "전체 조율, 인프라/배포, Docker 관리"
+    },
+    {
+      "name": "fe-developer",
+      "agentId": "fe-developer@project-dev",
+      "agentType": "developer",
+      "cwd": "<PROJECT_ROOT>/frontend",
+      "description": "프론트엔드 구현"
+    },
+    {
+      "name": "be-developer",
+      "agentId": "be-developer@project-dev",
+      "agentType": "developer",
+      "cwd": "<PROJECT_ROOT>/backend",
+      "description": "백엔드 API 구현"
+    },
+    {
+      "name": "tester",
+      "agentId": "tester@project-dev",
+      "agentType": "tester",
+      "cwd": "<PROJECT_ROOT>",
+      "description": "E2E 테스트, API 검증, 디버깅"
+    }
+  ]
+}

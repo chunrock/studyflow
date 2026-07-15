@@ -1,0 +1,27 @@
+{
+  "name": "qa-team",
+  "description": "품질 관리 팀. 문서 검증, 코드 리뷰, 보안 점검, 컴플라이언스, 테스트 자동화를 담당한다.",
+  "members": [
+    {
+      "name": "doc-reviewer",
+      "agentId": "doc-reviewer@qa-team",
+      "agentType": "reviewer",
+      "description": "문서 검증, 금지어/키워드 체크, 컴플라이언스 검증",
+      "skills": ["document-skills:pdf", "document-skills:docx"]
+    },
+    {
+      "name": "code-reviewer",
+      "agentId": "code-reviewer@qa-team",
+      "agentType": "reviewer",
+      "description": "코드 리뷰, 보안 점검, 품질 메트릭 분석",
+      "skills": ["superpowers:requesting-code-review", "superpowers:receiving-code-review"]
+    },
+    {
+      "name": "test-engineer",
+      "agentId": "test-engineer@qa-team",
+      "agentType": "tester",
+      "description": "테스트 자동화, 회귀 테스트, E2E 검증",
+      "skills": ["document-skills:webapp-testing", "superpowers:systematic-debugging"]
+    }
+  ]
+}

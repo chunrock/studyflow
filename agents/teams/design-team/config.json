@@ -1,0 +1,27 @@
+{
+  "name": "design-team",
+  "description": "디자인 팀. 인포그래픽, 다이어그램, UI/UX 설계, 발표자료, 시각자료 제작을 담당한다.",
+  "members": [
+    {
+      "name": "ui-designer",
+      "agentId": "ui-designer@design-team",
+      "agentType": "designer",
+      "description": "UI/UX 설계, Figma 연동, 디자인 시스템 관리",
+      "skills": ["figma:implement-design", "figma:create-design-system-rules", "document-skills:frontend-design"]
+    },
+    {
+      "name": "graphic-designer",
+      "agentId": "graphic-designer@design-team",
+      "agentType": "designer",
+      "description": "인포그래픽, 포스터, 시각자료 제작",
+      "skills": ["document-skills:canvas-design", "document-skills:algorithmic-art"]
+    },
+    {
+      "name": "slide-maker",
+      "agentId": "slide-maker@design-team",
+      "agentType": "writer",
+      "description": "발표자료, 슬라이드, 브랜드 적용 문서 제작",
+      "skills": ["document-skills:pptx", "document-skills:theme-factory", "document-skills:brand-guidelines"]
+    }
+  ]
+}
