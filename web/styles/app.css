@@ -1,0 +1,126 @@
+*{
+  box-sizing:border-box;
+}
+
+html,
+body{
+  width:100%;
+  height:100%;
+  margin:0;
+  overflow:hidden;
+  background:transparent;
+  color:var(--ink);
+  font-family:"Proposal Noto Sans KR","Noto Sans KR","Apple SD Gothic Neo",sans-serif;
+  line-height:1.4;
+  -webkit-font-smoothing:antialiased;
+}
+
+button{
+  font:inherit;
+}
+
+.overlay-shell{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+}
+
+.screen-dim{
+  position:absolute;
+  inset:0;
+  background:var(--overlay-dim);
+}
+
+.highlight-ring{
+  position:absolute;
+  border:4px solid var(--focus);
+  border-radius:14px;
+  background:var(--focus-fill);
+  box-shadow:0 0 0 9999px var(--overlay-dim),0 0 28px #ffd84daa;
+}
+
+.highlight-ring[data-accent="guide"]{
+  border-color:var(--guide);
+  background:var(--guide-fill);
+  box-shadow:0 0 0 9999px var(--overlay-dim),0 0 28px #4dc3ffaa;
+}
+
+.highlight-ring[data-accent="warning"]{
+  border-color:var(--warning);
+  background:var(--warning-fill);
+  box-shadow:0 0 0 9999px var(--overlay-dim),0 0 28px #ff5a3daa;
+}
+
+.highlight-ring[data-accent="success"]{
+  border-color:var(--success);
+  background:var(--success-fill);
+  box-shadow:0 0 0 9999px var(--overlay-dim),0 0 28px #2fbf71aa;
+}
+
+.callout{
+  position:absolute;
+  width:220px;
+  padding:16px 18px;
+  border:1px solid #ffffffcc;
+  border-radius:16px;
+  background:#fffffff2;
+  box-shadow:0 12px 34px #00000040;
+  pointer-events:auto;
+}
+
+.callout__eyebrow{
+  color:var(--deep);
+  font-size:12px;
+  font-weight:800;
+}
+
+.callout__title{
+  margin:6px 0 8px;
+  color:var(--ink);
+  font-size:17px;
+  font-weight:900;
+}
+
+.callout__body{
+  margin:0;
+  color:var(--ink);
+  font-size:13px;
+  font-weight:600;
+}
+
+.controlbar{
+  position:absolute;
+  left:50%;
+  bottom:24px;
+  display:flex;
+  gap:8px;
+  padding:10px;
+  border:1px solid #ffffff80;
+  border-radius:18px;
+  background:#172534d9;
+  box-shadow:0 12px 32px #0000004d;
+  transform:translateX(-50%);
+  pointer-events:auto;
+}
+
+.controlbar__button{
+  min-width:72px;
+  min-height:40px;
+  border:1px solid #ffffff44;
+  border-radius:12px;
+  background:#ffffff18;
+  color:#fff;
+  font-size:13px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.controlbar__button:hover{
+  background:#ffffff2b;
+}
+
+.controlbar__button--primary{
+  border-color:var(--focus);
+  background:var(--focus);
+  color:#382800;
+}

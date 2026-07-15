@@ -1,0 +1,37 @@
+@font-face{
+  font-family:"Proposal Noto Sans KR";
+  src:url("../fonts/NotoSansKR-Regular.ttf") format("truetype");
+  font-weight:400;
+  font-style:normal;
+  font-display:block;
+}
+
+@font-face{
+  font-family:"Proposal Noto Sans KR";
+  src:url("../fonts/NotoSansKR-Bold.ttf") format("truetype");
+  font-weight:700 900;
+  font-style:normal;
+  font-display:block;
+}
+
+:root{
+  --blue:#2878d0;
+  --deep:#15549b;
+  --cyan:#5cc8e8;
+  --accent:#a5e4f4;
+  --paper:#f7fbfe;
+  --pale:#eaf3fc;
+  --ink:#172534;
+  --muted:#6b7885;
+  --line:#d7e1eb;
+  --bg:#eef5fa;
+  --overlay-dim:#0000008f;
+  --focus:#ffd84d;
+  --focus-fill:#ffd84d24;
+  --warning:#ff5a3d;
+  --warning-fill:#ff5a3d24;
+  --success:#2fbf71;
+  --success-fill:#2fbf7124;
+  --guide:#4dc3ff;
+  --guide-fill:#4dc3ff24;
+}
