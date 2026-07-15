@@ -47,14 +47,14 @@ function createOverlayState(scenario) {
   };
 }
 
-const api = {
+const stateApi = {
   createOverlayState
 };
 
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = api;
+  module.exports = stateApi;
 }
 
 if (typeof window !== "undefined") {
-  window.StudyFlowState = api;
+  window.StudyFlowState = stateApi;
 }

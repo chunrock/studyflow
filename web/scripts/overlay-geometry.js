@@ -66,16 +66,16 @@ function toCssRect(rect) {
   };
 }
 
-const api = {
+const geometryApi = {
   clampRect,
   getCalloutPosition,
   toCssRect
 };
 
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = api;
+  module.exports = geometryApi;
 }
 
 if (typeof window !== "undefined") {
-  window.StudyFlowGeometry = api;
+  window.StudyFlowGeometry = geometryApi;
 }

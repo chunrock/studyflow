@@ -128,15 +128,15 @@ function normalizeScenario(input) {
   };
 }
 
-const api = {
+const schemaApi = {
   normalizeScenario,
   validateScenario
 };
 
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = api;
+  module.exports = schemaApi;
 }
 
 if (typeof window !== "undefined") {
-  window.StudyFlowSchema = api;
+  window.StudyFlowSchema = schemaApi;
 }
