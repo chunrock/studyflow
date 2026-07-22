@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "electron .",
     "preview": "node tools/static-server.js",
-    "check": "node --check electron/main.js && node --check electron/preload.js && node --check tools/static-server.js && node --check web/scripts/scenario-schema.js && node --check web/scripts/overlay-geometry.js && node --check web/scripts/overlay-state.js && node --check web/scripts/render.js && node --check web/scripts/app.js",
+    "check": "node --check electron/main.js && node --check electron/preload.js && node --check tools/static-server.js && node --check web/scripts/scenario-schema.js && node --check web/scripts/overlay-geometry.js && node --check web/scripts/overlay-state.js && node --check web/scripts/render.js && node --check web/scripts/editor.js && node --check web/scripts/app.js",
     "test": "node --test tests/*.test.js"
   },
   "dependencies": {

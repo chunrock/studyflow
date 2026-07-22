@@ -22,11 +22,33 @@
       <button class="controlbar__button" type="button" data-action="click-through">클릭 통과</button>
       <button class="controlbar__button" type="button" data-action="hide">숨김</button>
     </nav>
+    <aside class="editor-panel" data-role="editor">
+      <div class="editor-panel__header">
+        <strong>제작 모드</strong>
+        <button type="button" data-editor-action="toggle">닫기</button>
+      </div>
+      <label class="editor-field">
+        <span>단계 제목</span>
+        <input type="text" data-editor-field="title">
+      </label>
+      <label class="editor-field">
+        <span>설명</span>
+        <textarea rows="4" data-editor-field="body"></textarea>
+      </label>
+      <div class="editor-grid">
+        <label> X <input type="number" data-editor-field="x"></label>
+        <label> Y <input type="number" data-editor-field="y"></label>
+        <label> W <input type="number" data-editor-field="width"></label>
+        <label> H <input type="number" data-editor-field="height"></label>
+      </div>
+      <button class="editor-save" type="button" data-editor-action="apply">현재 단계에 반영</button>
+    </aside>
   </main>
   <script src="./scripts/scenario-schema.js"></script>
   <script src="./scripts/overlay-geometry.js"></script>
   <script src="./scripts/overlay-state.js"></script>
   <script src="./scripts/render.js"></script>
+  <script src="./scripts/editor.js"></script>
   <script src="./scripts/app.js"></script>
 </body>
 </html>

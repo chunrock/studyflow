@@ -13,12 +13,16 @@
     }
   }
 
+  const editor = window.StudyFlowEditor.createEditor({ state, render });
+
   function handleAction(action) {
     if (action === "next") {
       state.next();
+      editor.loadCurrentStep();
     }
     if (action === "previous") {
       state.previous();
+      editor.loadCurrentStep();
     }
     if (action === "click-through" || action === "click-through-on" || action === "click-through-off") {
       state.setClickThrough(!state.snapshot().clickThrough);
