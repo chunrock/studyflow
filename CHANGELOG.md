@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.1.1
+
+- Windows 실행 시 StudyFlow가 전체화면 오버레이가 아니라 1280x800 기본 창모드로 열리도록 창 옵션을 분리했다.
+- 빌드: `application/v0.1.1/StudyFlow-0.1.1-win-x64.zip` Windows x64 산출물을 생성했다. 크기: 125,906,131 bytes. SHA-256: `3fec4431dd1632a7a73f976c57581966f3af2cecbf65daa787e22f63da84726e`.
+
 ## 0.1.0
 
 - StudyFlow 프로젝트 초기 구조를 생성했다.

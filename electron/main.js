@@ -15,6 +15,7 @@ const { loadPermissionSettings, savePermissionSettings } = require("./permission
 const { createEditableCopy, finalizeEditSession, resolveOpenMode } = require("./open-mode");
 const { validatePackageIntegrity } = require("./package-integrity");
 const { autoFixCourseMeta, getShareGate, validateCourseForShare } = require("./share-validation");
+const { createWindowOptions } = require("./window-options");
 
 let overlayWindow;
 let clickThrough = false;
@@ -33,22 +34,10 @@ function getSampleCourseDir() {
 
 function createOverlayWindow() {
   const primaryDisplay = screen.getPrimaryDisplay();
-  const { width, height } = primaryDisplay.workAreaSize;
+  const windowOptions = createWindowOptions(primaryDisplay, process.platform);
 
   overlayWindow = new BrowserWindow({
-    width,
-    height,
-    x: primaryDisplay.workArea.x,
-    y: primaryDisplay.workArea.y,
-    frame: false,
-    transparent: true,
-    resizable: false,
-    movable: false,
-    fullscreenable: false,
-    alwaysOnTop: true,
-    skipTaskbar: true,
-    hasShadow: false,
-    backgroundColor: "#00000000",
+    ...windowOptions,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       contextIsolation: true,
@@ -57,7 +46,9 @@ function createOverlayWindow() {
     }
   });
 
-  overlayWindow.setAlwaysOnTop(true, "screen-saver");
+  if (windowOptions.alwaysOnTop) {
+    overlayWindow.setAlwaysOnTop(true, "screen-saver");
+  }
   overlayWindow.loadFile(path.join(__dirname, "..", "web", "index.html"));
 }
 
