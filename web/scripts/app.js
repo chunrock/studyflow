@@ -3,8 +3,8 @@
 (async function init() {
   const response = await fetch("./data/sample-course.json");
   const rawScenario = await response.json();
-  const scenario = window.StudyFlowSchema.normalizeScenario(rawScenario);
-  const state = window.StudyFlowState.createOverlayState(scenario);
+  let scenario = window.StudyFlowSchema.normalizeScenario(rawScenario);
+  let state = window.StudyFlowState.createOverlayState(scenario);
 
   function render() {
     window.StudyFlowRender.renderOverlay(state.snapshot(), window.StudyFlowGeometry);
@@ -13,9 +13,9 @@
     }
   }
 
-  const editor = window.StudyFlowEditor.createEditor({ state, render });
+  let editor = window.StudyFlowEditor.createEditor({ state, render });
 
-  function handleAction(action) {
+  async function handleAction(action) {
     if (action === "next") {
       state.next();
       editor.loadCurrentStep();
@@ -29,6 +29,17 @@
     }
     if (action === "hide") {
       document.body.hidden = true;
+    }
+    if (action === "save" && window.studyflow) {
+      await window.studyflow.saveScenario(scenario);
+    }
+    if (action === "open" && window.studyflow) {
+      const result = await window.studyflow.openScenario();
+      if (!result.canceled) {
+        scenario = window.StudyFlowSchema.normalizeScenario(result.scenario);
+        state = window.StudyFlowState.createOverlayState(scenario);
+        editor = window.StudyFlowEditor.createEditor({ state, render });
+      }
     }
     render();
   }
