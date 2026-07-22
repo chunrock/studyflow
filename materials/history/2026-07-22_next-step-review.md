@@ -7,13 +7,13 @@
 ## 수행 내용
 
 - README, CHANGELOG, package scripts, 웹 UI, Electron IPC, exporter, 테스트를 검토했다.
-- `CHANGELOG.md`가 참조하는 `docs/BACKLOG.md`가 누락된 것을 확인하고 생성했다.
+- `CHANGELOG.md`가 참조하는 `docs/planning/BACKLOG.md`가 누락된 것을 확인하고 생성했다.
 - 제작 패널을 닫으면 다시 열 수 없는 흐름을 확인하고 controlbar에 `제작` 버튼을 추가했다.
 - 시나리오를 다시 열 때 `createEditor`가 같은 버튼에 이벤트를 누적 등록할 수 있어, 에디터 액션 버튼을 새 노드로 교체한 뒤 현재 state에 맞게 바인딩하도록 수정했다.
 
 ## 산출물
 
-- `docs/BACKLOG.md`
+- `docs/planning/BACKLOG.md`
 - `web/index.html`
 - `web/scripts/app.js`
 - `web/scripts/editor.js`
@@ -31,7 +31,7 @@
 - 문서에는 백로그가 있다고 기록되어 있었으나 실제 파일이 없어 새로 보강했다.
 - 제작 패널 토글은 닫기만 가능했으므로 controlbar에서 다시 열 수 있게 했다.
 - 기존 포트 `5187`은 다른 StudyFlow 복사본(`/Users/crmacbook/Documents/studyflow`)이 점유하고 있어 종료 후 현재 프로젝트에서 등록 서버를 다시 실행했다.
-- `docs/BACKLOG.md`는 정적 서버 루트가 `web/`이므로 HTTP로 서빙되지 않는다. 저장소 관리 문서로 유지한다.
+- `docs/planning/BACKLOG.md`는 정적 서버 루트가 `web/`이므로 HTTP로 서빙되지 않는다. 저장소 관리 문서로 유지한다.
 
 ## 다음 단계
 

@@ -2,6 +2,8 @@
 
 교육 플로우를 화면 위 오버레이로 안내하는 StudyFlow 프로젝트입니다. 이 저장소에는 Electron 기반 교육 오버레이 앱 자료와 Claude Code/Codex 하네스 구성을 재현하기 위한 에이전트, 팀, 하위 프로젝트 자료가 함께 들어 있습니다.
 
+자료 관리를 쉽게 하기 위해 실행 소스는 루트의 역할별 폴더에 두고, 재사용 문서와 하네스 자료는 `materials/` 아래로 모았습니다.
+
 ## 현재 버전
 
 - 버전: `0.1.0`
@@ -59,27 +61,22 @@ npm run preview
 ├── CLAUDE.md
 ├── README.md
 ├── THEME.md
-├── agents
-│   ├── global
-│   │   ├── CLAUDE.md
-│   │   └── settings.template.json
-│   └── teams
-│       ├── bizdev-team
-│       ├── design-team
-│       ├── dev-team
-│       ├── ops-team
-│       ├── project-dev
-│       ├── project-frontend-dev
-│       ├── proposal-team
-│       └── qa-team
+├── docs
+│   ├── README.md
+│   └── planning
+│       └── BACKLOG.md
 ├── electron
 ├── application
 │   └── v0.1.0
+├── materials
+│   ├── README.md
+│   ├── agents
+│   │   ├── global
+│   │   └── teams
+│   ├── history
+│   └── subprojects
 ├── tests
-├── web
-└── subprojects
-    ├── project-dev.md
-    └── project-frontend-dev.md
+└── web
 ```
 
 ## 포함 내용
@@ -88,11 +85,13 @@ npm run preview
 - `electron/`: Electron 메인/프리로드 코드
 - `tests/`: 오버레이, 보관함, 공유 검사, 자동 저장, 변경 이력, 분류, 읽기 전용, 무결성 테스트
 - `application/v0.1.0/`: Windows x64 0.1.0 빌드 산출물
+- `docs/planning/`: 백로그와 다음 작업 후보
+- `materials/history/`: 날짜별 작업 이력
 - `AGENTS.md`: 이 저장소에서 에이전트가 따라야 할 운영 규칙
-- `agents/global/CLAUDE.md`: Claude Code 전역 작업 규칙 템플릿
-- `agents/global/settings.template.json`: `~/.claude/settings.json`에 반영할 수 있는 설정 템플릿
-- `agents/teams/*/config.json`: PROMPT.md에 정의된 8개 팀 구성
-- `subprojects/*.md`: 하위 프로젝트별 적용 목적, 역할, 사전 입력값, 작업 흐름
+- `materials/agents/global/CLAUDE.md`: Claude Code 전역 작업 규칙 템플릿
+- `materials/agents/global/settings.template.json`: `~/.claude/settings.json`에 반영할 수 있는 설정 템플릿
+- `materials/agents/teams/*/config.json`: PROMPT.md에 정의된 8개 팀 구성
+- `materials/subprojects/*.md`: 하위 프로젝트별 적용 목적, 역할, 사전 입력값, 작업 흐름
 
 ## 팀 목록
 
@@ -109,7 +108,7 @@ npm run preview
 
 ## 실제 적용 방법
 
-1. `agents/global/settings.template.json`을 검토하고 민감한 설정이 없는지 확인합니다.
+1. `materials/agents/global/settings.template.json`을 검토하고 민감한 설정이 없는지 확인합니다.
 2. 기존 `~/.claude/settings.json`, `~/.claude/CLAUDE.md`, `~/.claude/teams`를 백업합니다.
 3. 필요한 전역 규칙과 팀 설정만 `~/.claude` 아래로 복사합니다.
 4. `project-dev` 또는 `project-frontend-dev`의 `<PROJECT_ROOT>` 값을 실제 프로젝트 경로로 바꿉니다.
@@ -119,4 +118,4 @@ npm run preview
 
 - 실제 홈 디렉터리 설정을 바로 수정하지 않고, 먼저 이 저장소에서 템플릿을 갱신합니다.
 - 프로젝트별 경로, 포트, 비밀정보는 커밋하지 않습니다.
-- 팀 구성 변경 시 `agents/teams/<team>/config.json`과 관련 `subprojects/*.md`를 함께 갱신합니다.
+- 팀 구성 변경 시 `materials/agents/teams/<team>/config.json`과 관련 `materials/subprojects/*.md`를 함께 갱신합니다.
