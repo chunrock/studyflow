@@ -2,7 +2,10 @@
 
 const path = require("node:path");
 const fs = require("node:fs/promises");
-const { app, BrowserWindow, dialog, globalShortcut, ipcMain, screen } = require("electron");
+const { app, BrowserWindow, dialog, desktopCapturer, globalShortcut, ipcMain, screen } = require("electron");
+const { exportDocx } = require("./exporters/export-docx");
+const { exportPptx } = require("./exporters/export-pptx");
+const { exportPdf } = require("./exporters/export-pdf");
 
 let overlayWindow;
 let clickThrough = false;
@@ -97,6 +100,38 @@ ipcMain.handle("open-scenario", async () => {
 
   const text = await fs.readFile(result.filePaths[0], "utf8");
   return { canceled: false, scenario: JSON.parse(text) };
+});
+
+ipcMain.handle("capture-current-page", async (_event, stepId) => {
+  const sources = await desktopCapturer.getSources({
+    types: ["screen"],
+    thumbnailSize: screen.getPrimaryDisplay().size
+  });
+  const source = sources[0];
+  const assetsDir = path.join(__dirname, "..", "web", "data", "assets", "screenshots");
+  await fs.mkdir(assetsDir, { recursive: true });
+  const fileName = `${stepId || "step"}-${Date.now()}.png`;
+  const filePath = path.join(assetsDir, fileName);
+  await fs.writeFile(filePath, source.thumbnail.toPNG());
+  return { screenshotPath: `web/data/assets/screenshots/${fileName}` };
+});
+
+ipcMain.handle("export-scenario", async (_event, format, scenario) => {
+  const result = await dialog.showSaveDialog(overlayWindow, {
+    title: "교육 교안 내보내기",
+    defaultPath: `${scenario.id || "studyflow-course"}.${format}`,
+    filters: [{ name: format.toUpperCase(), extensions: [format] }]
+  });
+
+  if (result.canceled || !result.filePath) {
+    return { canceled: true };
+  }
+
+  if (format === "docx") await exportDocx(scenario, result.filePath);
+  if (format === "pptx") await exportPptx(scenario, result.filePath);
+  if (format === "pdf") await exportPdf(scenario, result.filePath);
+
+  return { canceled: false, filePath: result.filePath };
 });
 
 app.on("window-all-closed", () => {

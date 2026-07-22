@@ -12,6 +12,12 @@ contextBridge.exposeInMainWorld("studyflow", {
   openScenario() {
     return ipcRenderer.invoke("open-scenario");
   },
+  captureCurrentPage(stepId) {
+    return ipcRenderer.invoke("capture-current-page", stepId);
+  },
+  exportScenario(format, scenario) {
+    return ipcRenderer.invoke("export-scenario", format, scenario);
+  },
   onShortcut(callback) {
     const handler = (_event, action) => callback(action);
     ipcRenderer.on("shortcut", handler);

@@ -41,6 +41,18 @@
         editor = window.StudyFlowEditor.createEditor({ state, render });
       }
     }
+    if (action === "capture") {
+      await window.StudyFlowCapture.captureCurrentPage(state.getCurrentStep());
+    }
+    if (action === "export-docx" && window.studyflow) {
+      await window.studyflow.exportScenario("docx", scenario);
+    }
+    if (action === "export-pptx" && window.studyflow) {
+      await window.studyflow.exportScenario("pptx", scenario);
+    }
+    if (action === "export-pdf" && window.studyflow) {
+      await window.studyflow.exportScenario("pdf", scenario);
+    }
     render();
   }
 
