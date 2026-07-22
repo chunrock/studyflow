@@ -8,6 +8,40 @@
   <link rel="stylesheet" href="./styles/app.css">
 </head>
 <body>
+  <section class="library-shell" data-role="library">
+    <header class="library-header">
+      <div>
+        <p class="library-eyebrow">StudyFlow Library</p>
+        <h1>교육 자료 보관함</h1>
+      </div>
+      <button class="library-button library-button--primary" type="button" data-library-action="new">새 교육 자료</button>
+    </header>
+    <div class="library-toolbar">
+      <input type="search" data-library-role="search" placeholder="제목, 업무 프로그램, 태그 검색">
+      <button class="library-button" type="button" data-library-action="scan-folder">자료 폴더 검색</button>
+      <button class="library-button" type="button" data-library-action="refresh-status">위치 갱신</button>
+      <button class="library-button" type="button" data-library-action="validate-share">공유 전 검사</button>
+      <button class="library-button" type="button" data-action="open">파일 열기</button>
+    </div>
+    <div class="library-filters" aria-label="교육 자료 필터">
+      <label>부서
+        <select data-library-filter="department"></select>
+      </label>
+      <label>직군
+        <select data-library-filter="jobRole"></select>
+      </label>
+      <label>추가 분류
+        <input type="search" data-library-filter="category" placeholder="예: 신입교육">
+      </label>
+    </div>
+    <p class="library-status" data-library-role="status">샘플 교육 자료가 준비되었습니다.</p>
+    <div class="library-tabs" role="tablist" aria-label="자료 상태 필터">
+      <button class="library-tab library-tab--active" type="button" data-library-status="normal">정상 자료</button>
+      <button class="library-tab" type="button" data-library-status="missing">사라진 자료</button>
+    </div>
+    <section class="validation-panel" data-library-role="validation" hidden></section>
+    <div class="library-list" data-library-role="list"></div>
+  </section>
   <main class="overlay-shell" aria-live="polite">
     <div class="screen-dim" data-role="dim"></div>
     <div class="highlight-ring" data-role="highlight"></div>
@@ -20,6 +54,7 @@
       <button class="controlbar__button" type="button" data-action="previous">이전</button>
       <button class="controlbar__button controlbar__button--primary" type="button" data-action="next">다음</button>
       <button class="controlbar__button" type="button" data-action="click-through">클릭 통과</button>
+      <button class="controlbar__button" type="button" data-action="editor-toggle">제작</button>
       <button class="controlbar__button" type="button" data-action="hide">숨김</button>
       <button class="controlbar__button" type="button" data-action="open">열기</button>
       <button class="controlbar__button" type="button" data-action="save">저장</button>
@@ -56,6 +91,7 @@
   <script src="./scripts/render.js"></script>
   <script src="./scripts/editor.js"></script>
   <script src="./scripts/capture.js"></script>
+  <script src="./scripts/library.js"></script>
   <script src="./scripts/app.js"></script>
 </body>
 </html>

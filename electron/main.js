@@ -6,9 +6,16 @@ const { app, BrowserWindow, dialog, desktopCapturer, globalShortcut, ipcMain, sc
 const { exportDocx } = require("./exporters/export-docx");
 const { exportPptx } = require("./exporters/export-pptx");
 const { exportPdf } = require("./exporters/export-pdf");
+const { scanCourseFolder } = require("./library-scan");
+const { deleteLibrarySource, readLibraryStore, refreshLibraryItemStatus, writeLibraryStore } = require("./library-store");
+const { autoFixCourseMeta, validateCourseForShare } = require("./share-validation");
 
 let overlayWindow;
 let clickThrough = false;
+
+function getLibraryStorePath() {
+  return path.join(path.dirname(app.getPath("exe")), "database", "library.json");
+}
 
 function createOverlayWindow() {
   const primaryDisplay = screen.getPrimaryDisplay();
@@ -101,6 +108,46 @@ ipcMain.handle("open-scenario", async () => {
   const text = await fs.readFile(result.filePaths[0], "utf8");
   return { canceled: false, scenario: JSON.parse(text) };
 });
+
+ipcMain.handle("scan-library-folder", async () => {
+  const result = await dialog.showOpenDialog(overlayWindow, {
+    title: "교육 자료 폴더 검색",
+    properties: ["openDirectory"]
+  });
+
+  if (result.canceled || result.filePaths.length === 0) {
+    return { canceled: true };
+  }
+
+  const items = await scanCourseFolder(result.filePaths[0], 3);
+  return { canceled: false, folderPath: result.filePaths[0], items };
+});
+
+ipcMain.handle("read-library-store", async () => readLibraryStore(getLibraryStorePath()));
+
+ipcMain.handle("write-library-store", async (_event, store) => writeLibraryStore(getLibraryStorePath(), store));
+
+ipcMain.handle("refresh-library-status", async (_event, items) => refreshLibraryItemStatus(items));
+
+ipcMain.handle("delete-library-source", async (_event, item) => {
+  const result = await dialog.showMessageBox(overlayWindow, {
+    type: "warning",
+    buttons: ["삭제", "취소"],
+    defaultId: 1,
+    cancelId: 1,
+    title: "교육 자료 파일 삭제",
+    message: `"${item.title}" 자료 폴더를 실제로 삭제할까요?`,
+    detail: item.sourcePath || ""
+  });
+  if (result.response !== 0) {
+    return { canceled: true };
+  }
+  return { canceled: false, ...(await deleteLibrarySource(item.sourcePath)) };
+});
+
+ipcMain.handle("validate-share", async (_event, meta, scenario) => validateCourseForShare(meta, scenario));
+
+ipcMain.handle("autofix-share-meta", async (_event, meta, scenario) => autoFixCourseMeta(meta, scenario));
 
 ipcMain.handle("capture-current-page", async (_event, stepId) => {
   const sources = await desktopCapturer.getSources({

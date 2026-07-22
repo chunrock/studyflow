@@ -1,8 +1,17 @@
 "use strict";
 
 (function exposeEditor(global) {
+  function replaceActionButton(panel, action) {
+    const button = panel.querySelector(`[data-editor-action='${action}']`);
+    const freshButton = button.cloneNode(true);
+    button.replaceWith(freshButton);
+    return freshButton;
+  }
+
   function createEditor({ state, render }) {
     const panel = document.querySelector("[data-role='editor']");
+    const applyButton = replaceActionButton(panel, "apply");
+    const toggleButton = replaceActionButton(panel, "toggle");
     const fields = {
       title: panel.querySelector("[data-editor-field='title']"),
       body: panel.querySelector("[data-editor-field='body']"),
@@ -35,16 +44,26 @@
       render();
     }
 
-    panel.querySelector("[data-editor-action='apply']").addEventListener("click", applyToCurrentStep);
-    panel.querySelector("[data-editor-action='toggle']").addEventListener("click", () => {
-      panel.hidden = true;
-    });
+    function setVisible(visible) {
+      panel.hidden = !visible;
+      toggleButton.textContent = visible ? "닫기" : "열기";
+    }
+
+    function togglePanel() {
+      setVisible(panel.hidden);
+    }
+
+    applyButton.addEventListener("click", applyToCurrentStep);
+    toggleButton.addEventListener("click", togglePanel);
 
     loadCurrentStep();
+    setVisible(!panel.hidden);
 
     return {
       loadCurrentStep,
-      applyToCurrentStep
+      applyToCurrentStep,
+      togglePanel,
+      setVisible
     };
   }
 
