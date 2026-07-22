@@ -80,6 +80,34 @@ function validateCourseForShare(meta, scenario) {
   return { summary, issues };
 }
 
+function getShareGate(validationResult, warningsAccepted) {
+  const summary = validationResult && validationResult.summary ? validationResult.summary : {};
+  const errors = Number(summary.errors || 0);
+  const warnings = Number(summary.warnings || 0);
+  if (errors > 0) {
+    return {
+      allowed: false,
+      reason: "errors",
+      requiresWarningConfirmation: false,
+      message: "공유 전 검사 오류가 있어 내보내기를 차단했습니다."
+    };
+  }
+  if (warnings > 0 && !warningsAccepted) {
+    return {
+      allowed: false,
+      reason: "warnings-unconfirmed",
+      requiresWarningConfirmation: true,
+      message: "경고를 확인한 뒤 다시 내보내세요."
+    };
+  }
+  return {
+    allowed: true,
+    reason: warnings > 0 ? "warnings-accepted" : "clean",
+    requiresWarningConfirmation: warnings > 0,
+    message: warnings > 0 ? "경고 확인 후 공유를 계속합니다." : "공유 가능한 상태입니다."
+  };
+}
+
 function autoFixCourseMeta(meta, scenario) {
   const nextMeta = {
     ...meta,
@@ -108,5 +136,6 @@ function autoFixCourseMeta(meta, scenario) {
 
 module.exports = {
   autoFixCourseMeta,
+  getShareGate,
   validateCourseForShare
 };

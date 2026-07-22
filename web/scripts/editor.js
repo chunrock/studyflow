@@ -8,7 +8,7 @@
     return freshButton;
   }
 
-  function createEditor({ state, render }) {
+  function createEditor({ state, render, onApply }) {
     const panel = document.querySelector("[data-role='editor']");
     const applyButton = replaceActionButton(panel, "apply");
     const toggleButton = replaceActionButton(panel, "toggle");
@@ -42,6 +42,9 @@
         height: Number(fields.height.value)
       };
       render();
+      if (onApply) {
+        onApply(step);
+      }
     }
 
     function setVisible(visible) {

@@ -1,6 +1,6 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { autoFixCourseMeta, validateCourseForShare } = require("../electron/share-validation");
+const { autoFixCourseMeta, getShareGate, validateCourseForShare } = require("../electron/share-validation");
 
 const validMeta = {
   schemaVersion: "1.0.0",
@@ -62,4 +62,25 @@ test("autoFixCourseMeta fills safe metadata defaults", () => {
   assert.deepEqual(fixed.tags, []);
   assert.deepEqual(fixed.customCategories, []);
   assert.equal(fixed.contentHash, "sha256:course-1");
+});
+
+test("getShareGate blocks validation errors", () => {
+  const result = validateCourseForShare({ ...validMeta, title: "" }, validScenario);
+  const gate = getShareGate(result, true);
+
+  assert.equal(gate.allowed, false);
+  assert.equal(gate.reason, "errors");
+  assert.equal(gate.requiresWarningConfirmation, false);
+});
+
+test("getShareGate requires confirmation for warnings", () => {
+  const result = validateCourseForShare({
+    ...validMeta,
+    author: { accountName: "user" }
+  }, validScenario);
+
+  assert.equal(getShareGate(result, false).allowed, false);
+  assert.equal(getShareGate(result, false).reason, "warnings-unconfirmed");
+  assert.equal(getShareGate(result, true).allowed, true);
+  assert.equal(getShareGate(result, true).reason, "warnings-accepted");
 });

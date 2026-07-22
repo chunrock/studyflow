@@ -21,6 +21,7 @@
       <button class="library-button" type="button" data-library-action="scan-folder">자료 폴더 검색</button>
       <button class="library-button" type="button" data-library-action="refresh-status">위치 갱신</button>
       <button class="library-button" type="button" data-library-action="validate-share">공유 전 검사</button>
+      <button class="library-button" type="button" data-library-action="classification-settings" data-requires-edit="true">분류/태그 설정</button>
       <button class="library-button" type="button" data-action="open">파일 열기</button>
     </div>
     <div class="library-filters" aria-label="교육 자료 필터">
@@ -40,6 +41,25 @@
       <button class="library-tab" type="button" data-library-status="missing">사라진 자료</button>
     </div>
     <section class="validation-panel" data-library-role="validation" hidden></section>
+    <section class="recovery-panel" data-role="recovery-panel" hidden>
+      <header class="recovery-panel__header">
+        <h2>복구 가능한 교육 자료</h2>
+      </header>
+      <div class="recovery-list" data-role="recovery-list"></div>
+    </section>
+    <section class="classification-panel" data-role="classification-panel" hidden>
+      <header class="classification-panel__header">
+        <h2>분류/태그 설정</h2>
+        <button type="button" data-library-action="close-classification-settings">닫기</button>
+      </header>
+      <div class="classification-grid">
+        <label>부서 목록<textarea rows="3" data-classification-field="departments"></textarea></label>
+        <label>직군 목록<textarea rows="3" data-classification-field="jobRoles"></textarea></label>
+        <label>추가 분류<textarea rows="3" data-classification-field="customCategories"></textarea></label>
+      </div>
+      <div class="pending-terms" data-classification-role="pendingTerms"></div>
+      <button class="library-button library-button--primary" type="button" data-library-action="save-classification-settings">저장</button>
+    </section>
     <div class="library-list" data-library-role="list"></div>
   </section>
   <main class="overlay-shell" aria-live="polite">
@@ -54,16 +74,16 @@
       <button class="controlbar__button" type="button" data-action="previous">이전</button>
       <button class="controlbar__button controlbar__button--primary" type="button" data-action="next">다음</button>
       <button class="controlbar__button" type="button" data-action="click-through">클릭 통과</button>
-      <button class="controlbar__button" type="button" data-action="editor-toggle">제작</button>
+      <button class="controlbar__button" type="button" data-action="editor-toggle" data-requires-edit="true">제작</button>
       <button class="controlbar__button" type="button" data-action="hide">숨김</button>
       <button class="controlbar__button" type="button" data-action="open">열기</button>
-      <button class="controlbar__button" type="button" data-action="save">저장</button>
-      <button class="controlbar__button" type="button" data-action="capture">화면 저장</button>
-      <button class="controlbar__button" type="button" data-action="export-docx">Word</button>
-      <button class="controlbar__button" type="button" data-action="export-pptx">PPT</button>
-      <button class="controlbar__button" type="button" data-action="export-pdf">PDF</button>
+      <button class="controlbar__button" type="button" data-action="save" data-requires-edit="true">저장</button>
+      <button class="controlbar__button" type="button" data-action="capture" data-requires-edit="true">화면 저장</button>
+      <button class="controlbar__button" type="button" data-action="export-docx" data-requires-edit="true">Word</button>
+      <button class="controlbar__button" type="button" data-action="export-pptx" data-requires-edit="true">PPT</button>
+      <button class="controlbar__button" type="button" data-action="export-pdf" data-requires-edit="true">PDF</button>
     </nav>
-    <aside class="editor-panel" data-role="editor">
+    <aside class="editor-panel" data-role="editor" data-requires-edit="true">
       <div class="editor-panel__header">
         <strong>제작 모드</strong>
         <button type="button" data-editor-action="toggle">닫기</button>

@@ -8,13 +8,27 @@ const { exportPptx } = require("./exporters/export-pptx");
 const { exportPdf } = require("./exporters/export-pdf");
 const { scanCourseFolder } = require("./library-scan");
 const { deleteLibrarySource, readLibraryStore, refreshLibraryItemStatus, writeLibraryStore } = require("./library-store");
-const { autoFixCourseMeta, validateCourseForShare } = require("./share-validation");
+const { deleteAutosave, findRecoverableAutosaves, restoreAutosave, writeAutosave } = require("./course-autosave");
+const { appendChangeLog, readChangeLog } = require("./course-history");
+const { loadClassificationSettings, saveClassificationSettings } = require("./classification-settings");
+const { loadPermissionSettings, savePermissionSettings } = require("./permission-settings");
+const { createEditableCopy, finalizeEditSession, resolveOpenMode } = require("./open-mode");
+const { validatePackageIntegrity } = require("./package-integrity");
+const { autoFixCourseMeta, getShareGate, validateCourseForShare } = require("./share-validation");
 
 let overlayWindow;
 let clickThrough = false;
 
 function getLibraryStorePath() {
-  return path.join(path.dirname(app.getPath("exe")), "database", "library.json");
+  return path.join(getDatabaseDir(), "library.json");
+}
+
+function getDatabaseDir() {
+  return path.join(path.dirname(app.getPath("exe")), "database");
+}
+
+function getSampleCourseDir() {
+  return path.join(__dirname, "..", "web", "data");
 }
 
 function createOverlayWindow() {
@@ -147,7 +161,43 @@ ipcMain.handle("delete-library-source", async (_event, item) => {
 
 ipcMain.handle("validate-share", async (_event, meta, scenario) => validateCourseForShare(meta, scenario));
 
+ipcMain.handle("get-share-gate", async (_event, validationResult, warningsAccepted) => getShareGate(validationResult, warningsAccepted));
+
 ipcMain.handle("autofix-share-meta", async (_event, meta, scenario) => autoFixCourseMeta(meta, scenario));
+
+ipcMain.handle("get-current-course-dir", async () => getSampleCourseDir());
+
+ipcMain.handle("write-autosave", async (_event, coursePackage, reason) => writeAutosave(coursePackage, reason));
+
+ipcMain.handle("find-recoverable-autosaves", async (_event, courseDirs) => findRecoverableAutosaves(courseDirs));
+
+ipcMain.handle("restore-autosave", async (_event, record) => restoreAutosave(record));
+
+ipcMain.handle("delete-autosave", async (_event, courseDir) => {
+  await deleteAutosave(courseDir);
+});
+
+ipcMain.handle("read-change-log", async (_event, courseDir) => readChangeLog(courseDir));
+
+ipcMain.handle("append-change-log", async (_event, courseDir, entry) => appendChangeLog(courseDir, entry));
+
+ipcMain.handle("load-classification-settings", async () => loadClassificationSettings(getDatabaseDir()));
+
+ipcMain.handle("save-classification-settings", async (_event, settings) => saveClassificationSettings(getDatabaseDir(), settings));
+
+ipcMain.handle("load-permission-settings", async () => loadPermissionSettings(getDatabaseDir()));
+
+ipcMain.handle("save-permission-settings", async (_event, settings) => savePermissionSettings(getDatabaseDir(), settings));
+
+ipcMain.handle("resolve-open-mode", async (_event, input) => resolveOpenMode(input));
+
+ipcMain.handle("create-editable-copy", async (_event, coursePackage, employeeId) => (
+  createEditableCopy(coursePackage, path.join(app.getPath("temp"), "studyflow-edit"), employeeId)
+));
+
+ipcMain.handle("finalize-edit-session", async (_event, editSession, decision) => finalizeEditSession(editSession, decision));
+
+ipcMain.handle("validate-package-integrity", async (_event, input) => validatePackageIntegrity(input));
 
 ipcMain.handle("capture-current-page", async (_event, stepId) => {
   const sources = await desktopCapturer.getSources({
