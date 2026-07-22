@@ -15,7 +15,7 @@ const { loadPermissionSettings, savePermissionSettings } = require("./permission
 const { createEditableCopy, finalizeEditSession, resolveOpenMode } = require("./open-mode");
 const { validatePackageIntegrity } = require("./package-integrity");
 const { autoFixCourseMeta, getShareGate, validateCourseForShare } = require("./share-validation");
-const { createWindowOptions } = require("./window-options");
+const { chooseMenuDisplay, createWindowOptions } = require("./window-options");
 
 let overlayWindow;
 let clickThrough = false;
@@ -33,8 +33,10 @@ function getSampleCourseDir() {
 }
 
 function createOverlayWindow() {
+  const displays = screen.getAllDisplays();
   const primaryDisplay = screen.getPrimaryDisplay();
-  const windowOptions = createWindowOptions(primaryDisplay, process.platform);
+  const menuDisplay = process.platform === "win32" ? chooseMenuDisplay(displays) || primaryDisplay : primaryDisplay;
+  const windowOptions = createWindowOptions(menuDisplay, process.platform);
 
   overlayWindow = new BrowserWindow({
     ...windowOptions,

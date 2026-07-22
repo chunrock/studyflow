@@ -1,6 +1,6 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { createWindowOptions } = require("../electron/window-options");
+const { chooseMenuDisplay, createWindowOptions } = require("../electron/window-options");
 
 const display = {
   workArea: { x: 0, y: 0 },
@@ -31,4 +31,33 @@ test("createWindowOptions keeps overlay behavior on other platforms", () => {
   assert.equal(options.resizable, false);
   assert.equal(options.alwaysOnTop, true);
   assert.equal(options.skipTaskbar, true);
+});
+
+test("chooseMenuDisplay prefers the external second monitor", () => {
+  const primary = {
+    id: 1,
+    internal: true,
+    workArea: { x: 0, y: 0 },
+    workAreaSize: { width: 1440, height: 900 }
+  };
+  const secondary = {
+    id: 2,
+    internal: false,
+    workArea: { x: 1440, y: 0 },
+    workAreaSize: { width: 1920, height: 1040 }
+  };
+
+  assert.equal(chooseMenuDisplay([primary, secondary]), secondary);
+});
+
+test("createWindowOptions centers the Windows menu on monitor 2", () => {
+  const options = createWindowOptions({
+    workArea: { x: 1440, y: 0 },
+    workAreaSize: { width: 1920, height: 1040 }
+  }, "win32");
+
+  assert.equal(options.width, 1280);
+  assert.equal(options.height, 800);
+  assert.equal(options.x, 1760);
+  assert.equal(options.y, 120);
 });

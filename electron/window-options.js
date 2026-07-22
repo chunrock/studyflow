@@ -4,6 +4,14 @@ const DEFAULT_WINDOW_WIDTH = 1280;
 const DEFAULT_WINDOW_HEIGHT = 800;
 const WINDOW_MARGIN = 80;
 
+function chooseMenuDisplay(displays) {
+  const availableDisplays = Array.isArray(displays) && displays.length > 0 ? displays : [];
+  if (availableDisplays.length < 2) {
+    return availableDisplays[0] || null;
+  }
+  return availableDisplays.find((display) => !display.internal) || availableDisplays[1];
+}
+
 function createWindowOptions(display, platform) {
   const workArea = display.workArea;
   const workAreaSize = display.workAreaSize;
@@ -46,5 +54,6 @@ function createWindowOptions(display, platform) {
 }
 
 module.exports = {
+  chooseMenuDisplay,
   createWindowOptions
 };

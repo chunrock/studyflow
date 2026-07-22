@@ -10,7 +10,7 @@
 - 대상 플랫폼: Windows x64
 - 빌드 산출물: `application/v0.1.1/StudyFlow-0.1.1-win-x64.zip`
 - SHA-256: `3fec4431dd1632a7a73f976c57581966f3af2cecbf65daa787e22f63da84726e`
-- 검증: `npm run check`, `npm test` 66개 통과, zip 무결성 검사 통과
+- 검증: `npm run check`, `npm test` 70개 통과, zip 무결성 검사 통과
 
 ## StudyFlow 앱 기능
 
