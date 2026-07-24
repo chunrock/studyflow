@@ -6,6 +6,9 @@ contextBridge.exposeInMainWorld("studyflow", {
   setClickThrough(enabled) {
     return ipcRenderer.invoke("set-click-through", Boolean(enabled));
   },
+  windowCommand(command) {
+    return ipcRenderer.invoke("window-command", command);
+  },
   saveScenario(scenario) {
     return ipcRenderer.invoke("save-scenario", scenario);
   },

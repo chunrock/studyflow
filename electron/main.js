@@ -69,22 +69,58 @@ function sendShortcut(action) {
   }
 }
 
+function runWindowCommand(command) {
+  if (!overlayWindow || overlayWindow.isDestroyed()) {
+    return false;
+  }
+  if (command === "minimize" && overlayWindow.isMinimizable()) {
+    overlayWindow.minimize();
+    return true;
+  }
+  if (command === "maximize" && overlayWindow.isMaximizable()) {
+    if (overlayWindow.isMaximized()) {
+      overlayWindow.unmaximize();
+    } else {
+      overlayWindow.maximize();
+    }
+    return true;
+  }
+  if (command === "close" && overlayWindow.isClosable()) {
+    overlayWindow.close();
+    return true;
+  }
+  return false;
+}
+
+function toggleWindowVisibility() {
+  if (!overlayWindow || overlayWindow.isDestroyed()) return;
+  if (process.platform === "win32") {
+    if (overlayWindow.isMinimized()) {
+      overlayWindow.restore();
+      overlayWindow.focus();
+    } else {
+      overlayWindow.minimize();
+    }
+    return;
+  }
+  if (overlayWindow.isVisible()) {
+    overlayWindow.hide();
+  } else {
+    overlayWindow.showInactive();
+  }
+}
+
 app.whenReady().then(() => {
   createOverlayWindow();
 
   globalShortcut.register("CommandOrControl+Alt+Right", () => sendShortcut("next"));
   globalShortcut.register("CommandOrControl+Alt+Left", () => sendShortcut("previous"));
-  globalShortcut.register("CommandOrControl+Alt+H", () => {
-    if (overlayWindow.isVisible()) {
-      overlayWindow.hide();
-    } else {
-      overlayWindow.showInactive();
-    }
-  });
+  globalShortcut.register("CommandOrControl+Alt+H", toggleWindowVisibility);
   globalShortcut.register("CommandOrControl+Alt+T", () => setClickThrough(!clickThrough));
 });
 
 ipcMain.handle("set-click-through", (_event, enabled) => setClickThrough(enabled));
+ipcMain.handle("window-command", (_event, command) => runWindowCommand(command));
 
 ipcMain.handle("save-scenario", async (_event, scenario) => {
   const result = await dialog.showSaveDialog(overlayWindow, {

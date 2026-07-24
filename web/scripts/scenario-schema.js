@@ -75,6 +75,32 @@ function validateScenario(input) {
       if (step.callout && step.callout.placement !== undefined && !VALID_PLACEMENTS.has(step.callout.placement)) {
         errors.push(`${prefix}.callout.placement must be one of top, right, bottom, left`);
       }
+      if (step.annotations !== undefined) {
+        if (!Array.isArray(step.annotations)) {
+          errors.push(`${prefix}.annotations must be an array`);
+        } else {
+          step.annotations.forEach((annotation, annotationIndex) => {
+            const annotationPrefix = `${prefix}.annotations[${annotationIndex}]`;
+            if (!annotation || typeof annotation !== "object") {
+              errors.push(`${annotationPrefix} must be an object`);
+              return;
+            }
+            if (!isNonEmptyString(annotation.title)) {
+              errors.push(`${annotationPrefix}.title must be a non-empty string`);
+            }
+            if (!isNonEmptyString(annotation.body)) {
+              errors.push(`${annotationPrefix}.body must be a non-empty string`);
+            }
+            errors.push(...validateRect(annotation.highlight, annotationPrefix));
+            if (annotation.accent !== undefined && !VALID_ACCENTS.has(annotation.accent)) {
+              errors.push(`${annotationPrefix}.accent must be one of guide, warning, success, focus`);
+            }
+            if (annotation.callout && annotation.callout.placement !== undefined && !VALID_PLACEMENTS.has(annotation.callout.placement)) {
+              errors.push(`${annotationPrefix}.callout.placement must be one of top, right, bottom, left`);
+            }
+          });
+        }
+      }
     });
   }
 
@@ -123,7 +149,23 @@ function normalizeScenario(input) {
       },
       callout: {
         placement: step.callout && step.callout.placement ? step.callout.placement : "right"
-      }
+      },
+      annotations: Array.isArray(step.annotations) ? step.annotations.map((annotation, annotationIndex) => ({
+        id: annotation.id || `${step.id || `step-${index + 1}`}-annotation-${annotationIndex + 1}`,
+        number: annotation.number || annotationIndex + 1,
+        title: annotation.title.trim(),
+        body: annotation.body.trim(),
+        accent: annotation.accent || step.accent || "focus",
+        highlight: {
+          x: annotation.highlight.x,
+          y: annotation.highlight.y,
+          width: annotation.highlight.width,
+          height: annotation.highlight.height
+        },
+        callout: {
+          placement: annotation.callout && annotation.callout.placement ? annotation.callout.placement : "right"
+        }
+      })) : []
     }))
   };
 }

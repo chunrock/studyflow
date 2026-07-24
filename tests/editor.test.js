@@ -44,3 +44,15 @@ test("rectFromDrag keeps selection inside the viewport", () => {
 
   assert.deepEqual(rect, { x: 0, y: 50, width: 800, height: 550 });
 });
+
+test("createAnnotationFromRect creates numbered editable annotation data", () => {
+  const annotation = context.window.StudyFlowEditor.createAnnotationFromRect(
+    { x: 10, y: 20, width: 120, height: 60 },
+    1
+  );
+
+  assert.equal(annotation.number, 2);
+  assert.equal(annotation.title, "영역 2");
+  assert.equal(annotation.body, "설명을 입력하세요.");
+  assert.deepEqual(annotation.highlight, { x: 10, y: 20, width: 120, height: 60 });
+});

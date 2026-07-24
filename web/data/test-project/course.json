@@ -1,0 +1,43 @@
+{
+  "id": "test-project",
+  "title": "테스트 프로젝트",
+  "targetApp": "StudyFlow 테스트 화면",
+  "steps": [
+    {
+      "id": "step-1",
+      "title": "시작 화면 확인",
+      "body": "테스트 프로젝트가 정상적으로 열리는지 확인합니다.",
+      "screenshotPath": "web/data/assets/screenshots/step-1.png",
+      "accent": "focus",
+      "clickThrough": true,
+      "screenshotSize": { "width": 1920, "height": 1080 },
+      "highlightPx": { "x": 120, "y": 120, "width": 360, "height": 160 },
+      "highlightRatio": { "x": 0.0625, "y": 0.1111, "width": 0.1875, "height": 0.1481 },
+      "callout": { "placement": "right" }
+    },
+    {
+      "id": "step-2",
+      "title": "입력 흐름 점검",
+      "body": "단계 설명, 강조 박스, 클릭 통과 설정이 함께 표시되는지 확인합니다.",
+      "screenshotPath": "web/data/assets/screenshots/step-2.png",
+      "accent": "guide",
+      "clickThrough": true,
+      "screenshotSize": { "width": 1920, "height": 1080 },
+      "highlightPx": { "x": 560, "y": 320, "width": 520, "height": 240 },
+      "highlightRatio": { "x": 0.2917, "y": 0.2963, "width": 0.2708, "height": 0.2222 },
+      "callout": { "placement": "bottom" }
+    },
+    {
+      "id": "step-3",
+      "title": "완료 상태 확인",
+      "body": "마지막 단계에서 경고 색상과 이전/다음 이동 동작을 확인합니다.",
+      "screenshotPath": "web/data/assets/screenshots/step-3.png",
+      "accent": "warning",
+      "clickThrough": false,
+      "screenshotSize": { "width": 1920, "height": 1080 },
+      "highlightPx": { "x": 1080, "y": 700, "width": 260, "height": 110 },
+      "highlightRatio": { "x": 0.5625, "y": 0.6481, "width": 0.1354, "height": 0.1019 },
+      "callout": { "placement": "left" }
+    }
+  ]
+}

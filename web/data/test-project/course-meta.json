@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "1.0.0",
+  "courseId": "test-project",
+  "title": "테스트 프로젝트",
+  "description": "StudyFlow 기능 확인을 위한 테스트 교육 자료입니다.",
+  "summary": "시작 화면, 입력 흐름, 완료 상태 확인",
+  "author": {
+    "accountName": "studyflow-test",
+    "displayName": "StudyFlow 테스트 작성자"
+  },
+  "department": "테스트팀",
+  "jobRole": "검증",
+  "createdAt": "2026-07-23T14:00:00+09:00",
+  "updatedAt": "2026-07-23T14:00:00+09:00",
+  "lastSharedAt": "2026-07-23T14:00:00+09:00",
+  "pageCount": 3,
+  "contentHash": "sha256:test-project",
+  "tags": ["테스트", "샘플", "검증"],
+  "customCategories": ["테스트자료"]
+}

@@ -6,11 +6,11 @@
 
 ## 현재 버전
 
-- 버전: `0.1.1`
+- 버전: `0.1.2`
 - 대상 플랫폼: Windows x64
-- 빌드 산출물: `application/v0.1.1/StudyFlow-0.1.1-win-x64.zip`
-- SHA-256: `3fec4431dd1632a7a73f976c57581966f3af2cecbf65daa787e22f63da84726e`
-- 검증: `npm run check`, `npm test` 70개 통과, zip 무결성 검사 통과
+- 빌드 산출물: `application/v0.1.2/StudyFlow-0.1.2-win-x64.zip`
+- SHA-256: `3e93dbfa59419e481c523f085c07a71b39f5e22c8bc102d847459eaadaf616b3`
+- 검증: `npm run check`, `npm test` 72개 통과, zip 무결성 검사 통과
 
 ## StudyFlow 앱 기능
 
@@ -32,7 +32,7 @@
 
 ## Windows 실행 방법
 
-1. `application/v0.1.1/StudyFlow-0.1.1-win-x64.zip` 압축을 풉니다.
+1. `application/v0.1.2/StudyFlow-0.1.2-win-x64.zip` 압축을 풉니다.
 2. 압축 해제 폴더 안의 `StudyFlow.exe`를 실행합니다.
 3. 같은 폴더 기준으로 보관함/분류/권한/무결성 설정은 실행 파일 옆 `database/`에 생성됩니다.
 
@@ -67,7 +67,7 @@ npm run preview
 │       └── BACKLOG.md
 ├── electron
 ├── application
-│   └── v0.1.1
+│   └── v0.1.2
 ├── materials
 │   ├── README.md
 │   ├── agents
@@ -84,7 +84,7 @@ npm run preview
 - `web/`: StudyFlow 오버레이 웹 UI 원본
 - `electron/`: Electron 메인/프리로드 코드
 - `tests/`: 오버레이, 보관함, 공유 검사, 자동 저장, 변경 이력, 분류, 읽기 전용, 무결성 테스트
-- `application/v0.1.1/`: Windows x64 0.1.1 빌드 산출물
+- `application/v0.1.2/`: Windows x64 0.1.2 빌드 산출물
 - `docs/planning/`: 백로그와 다음 작업 후보
 - `materials/history/`: 날짜별 작업 이력
 - `AGENTS.md`: 이 저장소에서 에이전트가 따라야 할 운영 규칙

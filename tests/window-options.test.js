@@ -17,8 +17,12 @@ test("createWindowOptions uses normal window mode on Windows", () => {
   assert.equal(options.frame, true);
   assert.equal(options.transparent, false);
   assert.equal(options.resizable, true);
+  assert.equal(options.minimizable, true);
+  assert.equal(options.maximizable, true);
+  assert.equal(options.closable, true);
   assert.equal(options.alwaysOnTop, false);
   assert.equal(options.skipTaskbar, false);
+  assert.equal(options.autoHideMenuBar, false);
 });
 
 test("createWindowOptions keeps overlay behavior on other platforms", () => {
@@ -60,4 +64,9 @@ test("createWindowOptions centers the Windows menu on monitor 2", () => {
   assert.equal(options.height, 800);
   assert.equal(options.x, 1760);
   assert.equal(options.y, 120);
+  assert.equal(options.title, "StudyFlow Control");
+  assert.equal(options.frame, true);
+  assert.equal(options.minimizable, true);
+  assert.equal(options.maximizable, true);
+  assert.equal(options.closable, true);
 });

@@ -24,13 +24,18 @@ function createWindowOptions(display, platform) {
       height,
       x: Math.round(workArea.x + (workAreaSize.width - width) / 2),
       y: Math.round(workArea.y + (workAreaSize.height - height) / 2),
+      title: "StudyFlow Control",
       frame: true,
       transparent: false,
       resizable: true,
       movable: true,
+      minimizable: true,
+      maximizable: true,
+      closable: true,
       fullscreenable: true,
       alwaysOnTop: false,
       skipTaskbar: false,
+      autoHideMenuBar: false,
       hasShadow: true,
       backgroundColor: "#F5F7FA"
     };

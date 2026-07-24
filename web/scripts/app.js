@@ -447,7 +447,11 @@
       editor.togglePanel();
     }
     if (action === "hide") {
-      document.body.hidden = true;
+      if (window.studyflow && window.studyflow.windowCommand) {
+        await window.studyflow.windowCommand("minimize");
+      } else {
+        document.body.hidden = true;
+      }
     }
     if (action === "save" && window.studyflow) {
       await window.studyflow.saveScenario(scenario);
